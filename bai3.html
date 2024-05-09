@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game Oẳn Tù Tì</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin: 20px;
+        cursor: pointer;
+    }
+    #result {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+
+<h1>Game Oẳn Tù Tì</h1>
+
+<button id="oan-btn">Oẳn</button>
+<button id="tuti-btn">Tù tì</button>
+
+<div id="result"></div>
+
+<script>
+    // Lấy các phần tử HTML cần thiết
+    const oanBtn = document.getElementById('oan-btn');
+    const tutiBtn = document.getElementById('tuti-btn');
+    const resultDisplay = document.getElementById('result');
+
+    // Hàm chọn ngẫu nhiên oẳn hoặc tù tì cho máy tính
+    function computerChoice() {
+        const choices = ['oan', 'tuti'];
+        const randomIndex = Math.floor(Math.random() * choices.length);
+        return choices[randomIndex];
+    }
+
+    // Xử lý sự kiện khi người dùng nhấp vào nút
+    function handleButtonClick(userChoice) {
+        const computerChoiceResult = computerChoice();
+
+        // Hiển thị lựa chọn của máy tính
+        console.log('Lựa chọn của máy tính:', computerChoiceResult);
+
+        // So sánh lựa chọn của người dùng và máy tính để xác định kết quả
+        if (userChoice === computerChoiceResult) {
+            resultDisplay.textContent = 'Hòa!';
+        } else if ((userChoice === 'oan' && computerChoiceResult === 'tuti') ||
+                   (userChoice === 'tuti' && computerChoiceResult === 'oan')) {
+            resultDisplay.textContent = 'Bạn thắng!';
+        } else {
+            resultDisplay.textContent = 'Bạn thua!';
+        }
+    }
+
+    // Thêm trình xử lý sự kiện cho nút "Oẳn"
+    oanBtn.addEventListener('click', function() {
+        handleButtonClick('oan');
+    });
+
+    // Thêm trình xử lý sự kiện cho nút "Tù tì"
+    tutiBtn.addEventListener('click', function() {
+        handleButtonClick('tuti');
+    });
+</script>
+
+</body>
+</html>

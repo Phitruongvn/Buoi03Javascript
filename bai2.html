@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Danh Sách Môn Học</title>
+
+</head>
+<body>
+
+<h2>Quản Lý Danh Sách Môn Học</h2>
+
+<!-- Form nhập tên môn học -->
+<form id="add-form">
+    <label for="tenmonhoc">Tên Môn Học:</label>
+    <input type="text" id="tenmonhoc" name="tenmonhoc" required>
+    <button type="submit">Thêm</button>
+</form>
+
+<!-- Danh sách môn học -->
+<ul id="monhoc-list"></ul>
+
+<script>
+    // Lấy các phần tử HTML cần thiết
+    const addForm = document.getElementById('add-form');
+    const monhocList = document.getElementById('monhoc-list');
+
+    // Xử lý sự kiện khi form được submit
+    addForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Ngăn chặn việc gửi form mặc định
+
+        // Lấy giá trị nhập từ ô input
+        const tenmonhocInput = document.getElementById('tenmonhoc');
+        const tenmonhoc = tenmonhocInput.value.trim();
+
+        // Kiểm tra xem ô input có trống không
+        if (tenmonhoc === '') {
+            alert('Vui lòng nhập tên môn học.');
+            return;
+        }
+
+        // Tạo một mục mới trong danh sách và thêm vào
+        const newMonhocItem = document.createElement('li');
+        newMonhocItem.textContent = tenmonhoc;
+
+        // Tạo nút xóa và thêm vào mục mới
+        const deleteBtn = document.createElement('span');
+        deleteBtn.textContent = 'Xóa';
+        deleteBtn.classList.add('delete-btn');
+        deleteBtn.onclick = function() {
+            monhocList.removeChild(newMonhocItem);
+        };
+
+        // Thêm nút xóa vào mục mới
+        newMonhocItem.appendChild(deleteBtn);
+
+        // Thêm mục mới vào danh sách
+        monhocList.appendChild(newMonhocItem);
+
+        // Xóa giá trị trong ô input
+        tenmonhocInput.value = '';
+    });
+</script>
+
+</body>
+</html>
